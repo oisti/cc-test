@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('{anyExceptRoot}', function() {
     return view('welcome');
-});
+})->where('anyExceptRoot', '[^/]*');
