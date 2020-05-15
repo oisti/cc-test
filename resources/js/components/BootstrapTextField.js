@@ -22,17 +22,24 @@ const style = theme => ({
 			borderColor: theme.palette.primary.main,
 		},
 	},
+	inputError: {
+		borderColor: theme.palette.error.main,
+		'&:focus': {
+			boxShadow: `${fade(theme.palette.error.main, 0.25)} 0 0 0 0.2rem`,
+			borderColor: theme.palette.error.main
+		},
+	}
 })
 
 
-function BootstrapTextField({ classes, InputLabelProps, inputProps, InputProps, ...rest }) {
-
+function BootstrapTextField({ classes, InputLabelProps, inputProps, InputProps, error, ...rest }) {
 	const inputPropsClasses = InputProps?{...InputProps.classes, root: {...InputProps.classes.root, ...classes.root}}:{root: classes.root}
-
+console.log(error)
 	return <TextField
 				InputLabelProps={{ shrink: true,  ...InputLabelProps}}
 				InputProps={{...InputProps, disableUnderline: true, classes: inputPropsClasses}}
-				inputProps={{...inputProps, className: classNames(classes.input, inputProps.className)}}
+				inputProps={{...inputProps, className: classNames(classes.input, (error && classes.inputError), inputProps.className)}}
+				error={error}
 				{...rest} 
 			/>
 }
