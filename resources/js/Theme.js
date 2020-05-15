@@ -26,21 +26,18 @@ const theme = createMuiTheme({
 			},
 			contained:{
 				boxShadow: 'none',
+				padding: '12px 16px',
 				'&:hover': {
                     boxShadow: 'none'
                 }
 			}
 		},
-		MuiMenuItem: {
-			root: {
-				marginBottom: '0'
-			}
-		},
-		MuiInputBase: {
-			root: {
-				marginBottom: '0'
+		MuiFormLabel:{
+			root:{
+				fontSize: '1.3rem'
 			}
 		}
+		
 	}
 });
 

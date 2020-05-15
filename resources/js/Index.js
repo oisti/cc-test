@@ -10,7 +10,7 @@ import theme from './theme';
 
 
 
-import Auth from './screens/auth';
+import Auth from './screens/auth/auth';
 import Products from './screens/products';
 
 const mapStateToProps = state => ({
