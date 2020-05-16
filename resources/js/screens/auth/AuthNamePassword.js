@@ -24,9 +24,6 @@ const style = theme => ({
     generalForgot:{
         color: '#18218c'
     },
-    inputLabel:{
-        transformOrigin: 'right'
-    }
 });
 
 function AuthNamePassword({ classes, email, onSubmit }){
@@ -83,11 +80,11 @@ function AuthNamePassword({ classes, email, onSubmit }){
                         </Grid>
                         <Grid item xs={12}>
                             <BootstrapTextField 
-                                name="password2" 
+                                name="password_confirmation" 
                                 label="Password again"
                                 fullWidth 
-                                error={!!errors.password2}
-                                helperText={errors.password2?errors.password2.message:null}
+                                error={!!errors.password_confirmation}
+                                helperText={errors.password_confirmation?errors.password_confirmation.message:null}
                                 inputProps={{
                                     ref: register({
                                         required: "Required field",

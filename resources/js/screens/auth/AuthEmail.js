@@ -18,7 +18,7 @@ const style = theme => ({
         textTransform: 'none'
     },
     inputLabel:{
-        transformOrigin: 'right'
+        transformOrigin: '85%'
     }
 });
 

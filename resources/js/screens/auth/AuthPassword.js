@@ -21,7 +21,7 @@ const style = theme => ({
         color: '#18218c'
     },
     inputLabel:{
-        transformOrigin: 'right'
+        transformOrigin: '85%'
     }
 });
 
