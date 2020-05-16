@@ -12,7 +12,7 @@ import store from './store/store';
 import theme from './theme';
 
 import Auth from './screens/auth/auth';
-import Products from './screens/products';
+import Products from './screens/products/products';
 
 const mapStateToProps = state => ({
     isAuthenticated: state.Auth.isAuthenticated

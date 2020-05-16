@@ -36,6 +36,11 @@ const theme = createMuiTheme({
 			root:{
 				fontSize: '1.3rem'
 			}
+		},
+		MuiAppBar:{
+			colorPrimary:{
+				backgroundColor: '#fcfcfc'
+			}
 		}
 		
 	}

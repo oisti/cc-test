@@ -18,6 +18,9 @@ class ProductController extends Controller{
                 ->orWhere('name', 'like', '%'.$request->searchTerm.'%')
                 ->orWhere('size', 'like', '%'.$request->searchTerm.'%');
         }
+        if ($request->has('maxResults')){
+            $products->limit($request->maxResults);
+        }
         return $products->get();
     }
 }

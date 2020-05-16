@@ -33,12 +33,12 @@ const style = theme => ({
 
 
 function BootstrapTextField({ classes, InputLabelProps, inputProps, InputProps, error, ...rest }) {
-	const inputPropsClasses = InputProps?{...InputProps.classes, root: {...InputProps.classes.root, ...classes.root}}:{root: classes.root}
+	const inputPropsClasses = InputProps && InputProps.classes?{...InputProps.classes, root: {...InputProps.classes.root, ...classes.root}}:{root: classes.root}
 
 	return <TextField
 				InputLabelProps={{ shrink: true,  ...InputLabelProps}}
 				InputProps={{...InputProps, disableUnderline: true, classes: inputPropsClasses}}
-				inputProps={{...inputProps, className: classNames(classes.input, (error && classes.inputError), inputProps.className)}}
+				inputProps={{...inputProps, className: classNames(classes.input, (error && classes.inputError), inputProps?(inputProps.className):null)}}
 				error={error}
 				{...rest} 
 			/>

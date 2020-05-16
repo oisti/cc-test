@@ -66,7 +66,7 @@ function AuthPassword({ classes, email }){
                         <Grid item xs={12}>
                             <BootstrapTextField 
                                 name="password" 
-                                label=" Enter your CC account password"
+                                label="Enter your CC account password"
                                 InputLabelProps={{className:classes.inputLabel}}
                                 fullWidth 
                                 error={!!errors.password}
