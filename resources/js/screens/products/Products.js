@@ -6,6 +6,8 @@ import MainContainer from '../../components/MainContainer';
 
 import ProductsBG from '../../assets/img/bg.jpg';
 
+import PromocionalProduct from './PromocionalProduct';
+ 
 const useStyles = makeStyles((theme) => ({
     mainItem:{
         maxWidth: 1440
@@ -14,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage: "url(" + ProductsBG + ")",
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center top',
+        backgroundSize: 'contain'
     }
 }));
 
@@ -25,7 +28,8 @@ export default function Products({ children }) {
         <Grid container justify="center" className={classes.mainGridContainer}>
             <Grid item xs={12} className={classes.mainItem}>
                 <MainContainer>
-                    <div style={{height: 1000}}>
+                   <PromocionalProduct />
+                   <div style={{height: 1000}}>
                         alma
                     </div>
                 </MainContainer>

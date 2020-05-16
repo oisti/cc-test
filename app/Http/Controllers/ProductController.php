@@ -23,4 +23,10 @@ class ProductController extends Controller{
         }
         return $products->get();
     }
+
+    public function promoProduct(Request $request){
+        return Product::where('promotion','true')->first();
+    }
+
+    
 }

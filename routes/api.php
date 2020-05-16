@@ -27,5 +27,7 @@ Route::post('register', 'RegisterController@register');
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('categories', 'CategoryController@index');
     Route::post('products', 'ProductController@search');
+    Route::get('promoproduct', 'ProductController@promoProduct');
+    
 });
 
