@@ -2,7 +2,8 @@ import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import { persistStore } from 'redux-persist';
 import ReduxThunk from 'redux-thunk';
 
-import Auth from './authStore';
+import AuthStoreReducer from './authStore';
+import CartStoreReducer from './cartStore';
 
 const persistStoreReducer = (state = {}, { type, payload = null }) => {
     switch (type) {
@@ -16,13 +17,19 @@ const persistStoreReducer = (state = {}, { type, payload = null }) => {
     }
 };
 
-const RootReducer = combineReducers({ Auth, persistStoreReducer });
+const RootReducer = combineReducers({ 
+    Auth: AuthStoreReducer, 
+    Cart: CartStoreReducer,
+    persistStoreReducer 
+});
 
 const store = createStore(
     RootReducer,
-    compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__?compose(
         applyMiddleware(ReduxThunk),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    ):compose(
+        applyMiddleware(ReduxThunk)
     )
 );
 
