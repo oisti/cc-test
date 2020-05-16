@@ -1,2 +1,2 @@
-export {default as Api} from "./Api";
+export {default as api} from "./Api";
 export {default as BootstrapTextField} from "./BootstrapTextField";

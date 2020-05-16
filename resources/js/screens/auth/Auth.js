@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CCLogo from '../../assets/img/cc_logo_medium.png';
 
-//import { api } from '../../components'
+import { api } from '../../components'
 
 import AuthEmail from './AuthEmail.js'
 import AuthPassword from './AuthPassword'
@@ -35,9 +35,9 @@ function Auth({ classes }) {
     const [step, setStep] = useState(0);
     const [email, setEmail] = useState();
 
-    const step0 = values => {
+    const checkUser = values => {
         setEmail(values.email)
-        axios.post('api/checkuser', {
+        api.post('checkuser', {
             email: values.email
         }).then(response => {
             if (response.data) {
@@ -50,43 +50,6 @@ function Auth({ classes }) {
         });
     }
 
-    const step1 = values => {
-        axios.post('api/login', {
-            email,
-            password: values.password
-        }).then(response => {
-
-            console.log(response)
-
-            this.setState({ err: false });
-            this.props.history.push("home");
-
-        }).catch(error => {
-            this.refs.email.value = "";
-            this.refs.password.value = "";
-            this.setState({ err: true });
-        });
-
-    }
-
-    const step2 = values => {
-        axios.post('api/register', {
-            "name": "John", "email": "john.doe@toptal.com", "password": "1234", "password_confirmation": "1234"
-        }).then(response => {
-
-            console.log(response)
-
-            this.setState({ err: false });
-            this.props.history.push("home");
-
-        }).catch(error => {
-            console.log(error)
-            this.refs.email.value = "";
-            this.refs.password.value = "";
-            this.setState({ err: true });
-        });
-    }
-
     return (
         <Grid container direction="column" justify="space-around" alignItems="center" className={classes.authContaner}>
             <Grid item>
@@ -96,9 +59,9 @@ function Auth({ classes }) {
                 <Grid container direction="column">
                     <Grid item xs={12}>
                         <Card variant="outlined" className={classes.card}>
-                            {step === 0 && <AuthEmail onSubmit={step0} />}
-                            {step === 1 && <AuthPassword email={email} onSubmit={step1} />}
-                            {step === 2 && <AuthNamePassword email={email} onSubmit={step2} />}
+                            {step === 0 && <AuthEmail onSubmit={checkUser} />}
+                            {step === 1 && <AuthPassword email={email} />}
+                            {step === 2 && <AuthNamePassword email={email} />}
                         </Card>
                     </Grid>
                     <Grid item xs={12} className={classes.helpTextItem}>

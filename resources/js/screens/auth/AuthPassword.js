@@ -2,7 +2,10 @@ import React from 'react';
 import { Grid, Typography, Button, Link } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-import { BootstrapTextField } from "../../components";
+import { useHistory } from 'react-router-dom';
+import { BootstrapTextField, api } from "../../components";
+import { useDispatch } from 'react-redux'
+import { AUTH_LOGIN } from '../../store/authStore';
 
 const style = theme => ({
     welcomeText:{
@@ -25,8 +28,25 @@ const style = theme => ({
     }
 });
 
-function AuthPassword({ classes, email, onSubmit }){
-    const { handleSubmit, register, errors } = useForm();
+function AuthPassword({ classes, email }){
+    const { handleSubmit, register, errors, setError } = useForm();
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const loginUser = values => {
+        api.post('login', {
+            email,
+            password: values.password
+        }).then(response => {
+            dispatch({type: AUTH_LOGIN, payload: response.data.data})
+            history.push("/");  
+        }).catch(error => {
+            if (error.data && error.data.error){
+                 setError("password", "notMatch", error.data.error);
+            }
+        });
+
+    }
 
     return (
         <Grid container justify="center" alignItems="center" spacing={1}>
@@ -41,7 +61,7 @@ function AuthPassword({ classes, email, onSubmit }){
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(loginUser)}>
                     <Grid container justify="center" alignItems="center" spacing={2}>
                         <Grid item xs={12}>
                             <BootstrapTextField 

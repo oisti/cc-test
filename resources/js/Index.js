@@ -5,10 +5,11 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline} from '@material-ui/core';
 import { Provider, connect } from 'react-redux';
 
+import { useDispatch } from 'react-redux'
+import { AUTH_CHECK } from './store/authStore';
+
 import store from './store/store';
 import theme from './theme';
-
-
 
 import Auth from './screens/auth/auth';
 import Products from './screens/products';
@@ -29,6 +30,7 @@ const PrivateRoute =  connect(mapStateToProps)(({ component: Component, isAuthen
     />
 ));
 
+store.dispatch({type: AUTH_CHECK});
 
 function Index() {
     return (
