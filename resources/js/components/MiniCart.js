@@ -68,7 +68,7 @@ export default function MiniCart({ children }) {
                 aria-controls="cart-menu"
                 aria-haspopup="true"
                 >
-                Cart
+                <Hidden smDown>Cart</Hidden>
             </Button>
             <Menu
                 id="cart-menu"
@@ -87,7 +87,7 @@ export default function MiniCart({ children }) {
                     horizontal: 'right',
                 }}
                 PaperProps={{
-                    className: classes.cartPaper
+                    className: classes.cartPaper,
                 }}
             >
                 

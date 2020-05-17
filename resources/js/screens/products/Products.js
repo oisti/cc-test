@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Typography, MenuList, MenuItem } from '@material-ui/core';
+import { Grid, Paper, Typography, MenuList, MenuItem, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { Link, useRouteMatch } from "react-router-dom";
@@ -17,13 +17,16 @@ const useStyles = makeStyles((theme) => {
    // console.log(theme);
 return({
     mainItem:{
-        maxWidth: 1440
+        maxWidth: 1440,
+        [theme.breakpoints.down('md')]: {
+            margin: theme.spacing(2)
+        },
     },
     mainGridContainer:{
         backgroundImage: "url(" + ProductsBG + ")",
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center top',
-        backgroundSize: 'contain'
+       // backgroundSize: 'contain'
     },
     categoryGridContainer:{
         paddingTop: 130
@@ -53,7 +56,12 @@ return({
         textDecoration: 'none'
     },
     productGridContainer:{
-        paddingTop: 60
+        marginTop: 60,
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        [theme.breakpoints.down('md')]: {
+            marginTop: 40,
+        },
     },
     brandsPaper:{
         backgroundColor: '#dee1e3',
@@ -84,7 +92,15 @@ return({
     },
     productItemContainer:{
         maxWidth: '20%',
-        flexBasis: '20%'
+        flexBasis: '20%',
+        [theme.breakpoints.down('md')]: {
+            maxWidth: '50%',
+            flexBasis: '50%',
+        },
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '100%',
+            flexBasis: '100%',
+        },
     }
 
 })});
@@ -139,39 +155,42 @@ export default function Products({ children }) {
         <Grid container justify="center" className={classes.mainGridContainer}>
             <Grid item xs={12} className={classes.mainItem}>
                 <MainContainer>
-                   <PromocionalProduct />
-                   <Grid container spacing={3} alignItems="stretch" className={classes.categoryGridContainer}>
-                        {categories && categories.map(category =>{
-                            return (
-                                <Grid key={category.id} item xs={2}>
-                                    <Link to={"/"+category.url_friendly} className={classes.categoryLink} >
-                                        <Paper className={classNames(classes.categoryPaper, (activeCategory.id === category.id?classes.categoryPaperActive: null))}>
-                                            <Grid container direction="row" justify="center" alignItems="center" className={classes.categoryPaperGridContainer}>
-                                                <Grid item xs={12}>
-                                                    <CategoryIcons category={category}/>
-                                                    <Typography className={classes.categoryName}>{category.name}</Typography>
+                    <PromocionalProduct />
+                    <Hidden smDown>
+                        <Grid container spacing={3} alignItems="stretch" className={classes.categoryGridContainer}>
+                            {categories && categories.map(category =>{
+                                return (
+                                    <Grid key={category.id} item xs={2}>
+                                        <Link to={"/"+category.url_friendly} className={classes.categoryLink} >
+                                            <Paper className={classNames(classes.categoryPaper, (activeCategory.id === category.id?classes.categoryPaperActive: null))}>
+                                                <Grid container direction="row" justify="center" alignItems="center" className={classes.categoryPaperGridContainer}>
+                                                    <Grid item xs={12}>
+                                                        <CategoryIcons category={category}/>
+                                                        <Typography className={classes.categoryName}>{category.name}</Typography>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </Paper>
-                                    </Link>
-                                </Grid>
-                            )
-                        })}
-                   </Grid>
-
-                   <Grid container spacing={3} className={classes.productGridContainer}>
-                        <Grid item xs={2}>
-                            <Paper className={classes.brandsPaper}>
-                                <MenuList>
-                                    <MenuItem onClick={()=>setActiveBrand(null)} className={classes.brandMenuItem}>{activeCategory.name}</MenuItem>
-                                    {productBrands.map(brand =>
-                                        <MenuItem key={brand} onClick={()=>setActiveBrand(brand)} className={classNames(classes.brandMenuItem, brand === activeBrand? classes.brandMenuItemActive:null)}>{brand}</MenuItem>
-                                    )}
-                                </MenuList>
-                            </Paper>
+                                            </Paper>
+                                        </Link>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
-
-                        <Grid item xs={10}>
+                    </Hidden>
+                    <Grid container spacing={3} className={classes.productGridContainer}>
+                        <Hidden xsDown>
+                            <Grid item sm={3} md={2}>
+                                <Paper className={classes.brandsPaper}>
+                                    <MenuList>
+                                        <MenuItem onClick={()=>setActiveBrand(null)} className={classes.brandMenuItem}>{activeCategory.name}</MenuItem>
+                                        {productBrands.map(brand =>
+                                            <MenuItem key={brand} onClick={()=>setActiveBrand(brand)} className={classNames(classes.brandMenuItem, brand === activeBrand? classes.brandMenuItemActive:null)}>{brand}</MenuItem>
+                                        )}
+                                    </MenuList>
+                                </Paper>
+                            </Grid>
+                        </Hidden>
+                        
+                        <Grid item xs={12} sm={9} md={10}>
                             <Grid container spacing={3}>
                                 {productBrands.filter(brand => activeBrand?brand === activeBrand: true).map(brand =>(
                                     <React.Fragment key={brand}>

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '60%',
-        backgroundPosition: 'right bottom'
+        backgroundPosition: 'right bottom',
     },
     brand:{
         fontSize: '1.2rem',
@@ -149,17 +149,17 @@ export default function ProductItem({ product }) {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={1}>
-                        <Grid item xs={3} >
+                        <Grid item sm={2} md={3} >
                             <Paper className={classNames(classes.tireClassIcond, classes.fuelEfficiencyClass)}>
                                 <FuelEfficiencyClass fill='#fff' height={15} style={{paddingRight:4}}/>{product.fuel_efficiency_class}
                             </Paper>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item sm={2} md={3}>
                             <Paper className={classNames(classes.tireClassIcond, classes.wetGripClass)}>
                                 <WetGripClass fill='#fff' height={15} style={{paddingRight:4}}/>{product.wet_grip_class}
                             </Paper>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item sm={2} md={3}>
                             <Paper className={classNames(classes.tireClassIcond, classes.noiseEmission)}>
                                 <NoiseEmission fill='#fff' height={15} style={{paddingRight:4}}/>{product.noise_emission}
                             </Paper>
@@ -175,7 +175,7 @@ export default function ProductItem({ product }) {
                 <Grid item xs={12}>
                     <Typography className={classes.available}>Available</Typography>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item sm={8} md={6} lg={10}>
                     <Paper variant="outlined" className={classes.addToCartPaper}>
                         <Button variant="contained" color="primary" fullWidth style={{padding: 4}}>
                             <Grid container justify="center" alignItems="center">

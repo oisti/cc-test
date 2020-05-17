@@ -11,27 +11,42 @@ const math = create(all, {})
 
 const useStyles = makeStyles((theme) => ({
     mainContainer:{
-        paddingTop: 200
+        paddingTop: 200,
+        [theme.breakpoints.down('md')]: {
+            paddingTop: 100,
+        },
     },
     h1:{
         fontSize: 68,
         color: '#fff',
         fontWeight: 800,
-        lineHeight: 1
+        lineHeight: 1,
+        [theme.breakpoints.down('md')]: {
+            fontSize: 58,
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 30,
+        },
     },
     h4:{
         fontSize: 23,
         color: '#fff',
     },
     productContainer:{
-        paddingTop: 170,
-        width: 450
+        paddingTop: 150,
+        maxWidth: 450,
+        [theme.breakpoints.down('md')]: {
+            paddingTop: 50,
+        },
     },
     brand:{
         fontSize: 48,
         color: '#fff',
         fontWeight: 800,
-        lineHeight: 1
+        lineHeight: 1,
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 30,
+        },
     },
     typeGridItem:{
         textAlign: 'center'
@@ -48,12 +63,18 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 48,
         color: '#fff',
         fontWeight: 800,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        lineHeight: 1,
+        paddingTop: 8
     },
     discountPrice:{
         fontSize: 60,
         color: '#418ef6',
         fontWeight: 800,
+        lineHeight: 1
+    },
+    findOutMore:{
+        marginTop: 32
     }
 }));
 
@@ -71,10 +92,10 @@ export default function PromocionalProduct({ children }) {
 
     return (
         <Grid container direction="column" justify="flex-start" alignItems="flex-start" className={classes.mainContainer}>
-            <Grid item>
+            <Grid item xs={12}>
                 <Typography component="h1" className={classes.h1}>Best Offers on Winter Tires</Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
                 <Typography component="h4" className={classes.h4}>Tires for cars, trucks, vans and agricultural vehicles</Typography>
             </Grid>
             {product.id && <Grid item>
@@ -94,7 +115,7 @@ export default function PromocionalProduct({ children }) {
                         <Typography className={classes.discountPrice}>{math.round(math.subtract(Number(product.price), math.multiply(Number(product.price), math.divide(Number(product.discount_percent), 100))),2)} Lei</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                       <Button variant="contained" color="primary">Find out more</Button>
+                       <Button variant="contained" color="primary" className={classes.findOutMore}>Find out more</Button>
                     </Grid>
                 </Grid>
             </Grid>}

@@ -36,7 +36,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         borderRadius: 4,
         maxWidth: 1440,
-        right:'auto'
+        right:'auto',
+        [theme.breakpoints.down('md')]: {
+            right:0,
+        },
     },
     toolbar:{
         minHeight: 50
@@ -52,7 +55,10 @@ const useStyles = makeStyles((theme) => ({
     },
     ccIconButton:{
         padding: theme.spacing(),
-        marginRight: theme.spacing(4)
+        marginRight: theme.spacing(4),
+        [theme.breakpoints.down('sm')]: {
+            marginRight: theme.spacing()
+        },
     },
     searchBootstrapTextField:{
         width: '100%',
@@ -141,7 +147,7 @@ export default function Header({ children }) {
                             onChange={searchOnChange}
                             InputProps={{
                                 endAdornment: <InputAdornment position="end" className={classes.searchInputAdornment}>
-                                                <Button variant="contained" color="primary" className={classes.searchInputAdornmentButton}>Search</Button>
+                                                 <Hidden smDown><Button variant="contained" color="primary" className={classes.searchInputAdornmentButton}>Search</Button></Hidden>
                                             </InputAdornment>,
                             }}
                             aria-controls="products-menu" 
