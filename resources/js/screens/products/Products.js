@@ -3,11 +3,9 @@ import { Grid, Paper, Typography, MenuList, MenuItem, Hidden } from '@material-u
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { Link, useRouteMatch } from "react-router-dom";
-
-
 import ProductsBG from '../../assets/img/bg.jpg';
 
-import { MainContainer, api} from "../../components";
+import { MainContainer, Footer, api} from "../../components";
 import CategoryIcons from '../../assets/svg/CategoryIcons';
 import PromocionalProduct from './PromocionalProduct';
 import ProductItem from './ProductItem';
@@ -18,6 +16,7 @@ const useStyles = makeStyles((theme) => {
 return({
     mainItem:{
         maxWidth: 1440,
+        minHeight: 1000,
         [theme.breakpoints.down('md')]: {
             marginRight: theme.spacing(2),
             marginLeft: theme.spacing(2),
@@ -27,7 +26,6 @@ return({
         backgroundImage: "url(" + ProductsBG + ")",
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center top',
-       // backgroundSize: 'contain'
     },
     categoryGridContainer:{
         paddingTop: 130
@@ -58,6 +56,7 @@ return({
     },
     productGridContainer:{
         marginTop: 60,
+        marginBottom: 20,
         backgroundColor: '#fff',
         borderRadius: 4,
         [theme.breakpoints.down('md')]: {
@@ -153,6 +152,7 @@ export default function Products({ children }) {
     productBrands.sort();
    
     return (
+        <>
         <Grid container justify="center" className={classes.mainGridContainer}>
             <Grid item xs={12} className={classes.mainItem}>
                 <MainContainer>
@@ -213,5 +213,7 @@ export default function Products({ children }) {
                 </MainContainer>
             </Grid>
         </Grid>
+        <Footer />
+        </>
     )
 };

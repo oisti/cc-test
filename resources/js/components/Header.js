@@ -6,23 +6,13 @@ import {
     IconButton,  
     Button, 
     InputAdornment, 
-    MenuItem, 
-    Menu, 
     Popover, 
     Typography, 
     Hidden,
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody, 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useSelector } from 'react-redux'
 
 import CCLogo from '../assets/svg/CCLogo';
