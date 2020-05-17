@@ -1,3 +1,5 @@
+import api from '../components/Api';
+
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_CHECK = 'AUTH_CHECK';
 
@@ -5,6 +7,7 @@ const authLogin = (state, payload) => {
 	const { api_token, ...user } = payload;
 	localStorage.setItem('api_token', api_token);
 	localStorage.setItem('user', JSON.stringify(user));
+	api.defaults.headers.common.Authorization = `Bearer ${api_token}`;
 	const stateObj = Object.assign({}, state, {
 		isAuthenticated: true,
 		user
@@ -17,6 +20,10 @@ const checkAuth = state => {
 		isAuthenticated: !!localStorage.getItem('api_token'),
 		user: JSON.parse(localStorage.getItem('user'))
 	});
+
+	if (!!localStorage.getItem('api_token')) {
+		api.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('api_token')}`;
+	}
 	return stateObj;
 };
 
