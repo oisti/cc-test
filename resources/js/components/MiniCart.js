@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     Grid, 
     Button, 
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MiniCart({ children }) {
     const classes = useStyles();
-    const [cartAnchorEl, setCartAnchorEl] = React.useState(null);
+    const [cartAnchorEl, setCartAnchorEl] = useState(null);
     const cartItems = useSelector(state => state.Cart)
     const history = useHistory();
     const dispatch = useDispatch();
@@ -67,7 +67,6 @@ export default function MiniCart({ children }) {
                 endIcon={Boolean(cartAnchorEl)?<ExpandLessIcon className={classes.expandMoreIcon} />:<ExpandMoreIcon className={classes.expandMoreIcon} />}
                 aria-controls="cart-menu"
                 aria-haspopup="true"
-                
                 >
                 Cart
             </Button>
@@ -108,10 +107,10 @@ export default function MiniCart({ children }) {
                                     {cartItems.map((row) => (
                                         <TableRow key={row.id}>
                                             <TableCell component="th" scope="row">
-                                                <b>{row.product.brand}</b> {row.product.model}
+                                                <b>{row.brand}</b> {row.model}
                                             </TableCell>
                                             <TableCell align="center">{row.quantity}</TableCell>
-                                            <TableCell align="right">{row.product.price * row.quantity} Lei</TableCell>
+                                            <TableCell align="right">{row.price * row.quantity} Lei</TableCell>
                                         </TableRow>
                                     ))}
                                         <TableRow>

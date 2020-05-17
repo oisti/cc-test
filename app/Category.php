@@ -10,6 +10,5 @@ class Category extends Model
         'url_friendly',
         'name'
     ];
-
    
 }

@@ -167,7 +167,7 @@ export default function Products({ children }) {
                         </Grid>
 
                         <Grid item xs={10}>
-                            <Grid container spacing={3}>
+                            <Grid container spacing={4}>
                                 {productBrands.filter(brand => activeBrand?brand === activeBrand: true).map(brand =>(
                                     <React.Fragment key={brand}>
                                         <Grid item xs={12}>

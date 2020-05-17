@@ -31,7 +31,7 @@ class ProductTableSeeder extends Seeder
         
 
 
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             $brand = $faker->randomElement($brands);
 
             Product::create([
