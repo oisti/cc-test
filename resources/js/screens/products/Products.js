@@ -80,8 +80,13 @@ return({
         borderBottomStyle: 'solid',
         borderBottomWidth: 1,
         borderBottomColor: theme.palette.primary.main,
-        marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(3),
+    },
+    productItemContainer:{
+        maxWidth: '20%',
+        flexBasis: '20%'
     }
+
 })});
 
 export default function Products({ children }) {
@@ -167,14 +172,14 @@ export default function Products({ children }) {
                         </Grid>
 
                         <Grid item xs={10}>
-                            <Grid container spacing={4}>
+                            <Grid container spacing={3}>
                                 {productBrands.filter(brand => activeBrand?brand === activeBrand: true).map(brand =>(
                                     <React.Fragment key={brand}>
                                         <Grid item xs={12}>
                                             <Typography component='h3' className={classes.producListBrand}>{brand}</Typography>
                                         </Grid>
                                         {products.filter(product => product.brand === brand).map(product =>(
-                                            <Grid key={product.id} item xs={6} md={3}>
+                                            <Grid key={product.id} item xs={6} md={3} className={classes.productItemContainer}>
                                                 <ProductItem product={product} />
                                             </Grid>
                                         ))}

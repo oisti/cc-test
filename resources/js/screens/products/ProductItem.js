@@ -19,7 +19,10 @@ const math = create(all, {})
 const useStyles = makeStyles((theme) => ({
     mainPaper:{
         padding: theme.spacing(2),
-        height: '100%'
+        height: '100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '60%',
+        backgroundPosition: 'right bottom'
     },
     brand:{
         fontSize: '1.2rem',
@@ -78,11 +81,18 @@ const useStyles = makeStyles((theme) => ({
     },
     quantitySelect:{
         backgroundColor: 'white',
-       
+        borderRadius: 4
     },
     quantitySelectInputProps:{
-        padding: 8,
-        paddingRight: 28,
+        padding: 4,
+    },
+    addToCartText:{
+        fontSize: '0.8rem',
+        textTransform: 'none'
+    },
+    shoppingCartIcon:{
+        height: 20,
+        paddingTop: 4
     }
 }));
 
@@ -106,15 +116,15 @@ export default function ProductItem({ product }) {
     }
 
     return (
-        <Paper variant="outlined" className={classes.mainPaper}>
+        <Paper variant="outlined" className={classes.mainPaper} style={{backgroundImage: 'url(/images/'+product.image_url+')'}}>
             <Grid container>
                 <Grid item xs={12}>
                     <Grid container justify="space-between">
-                        <Grid item xs={9}>
+                        <Grid item xs={8}>
                             <Typography component='h4' className={classes.brand}>{product.brand}</Typography>
                             <Typography className={classes.model}>{product.model}</Typography>
                         </Grid>
-                        <Grid item xs={3} className={classes.productTypeGridItem}>
+                        <Grid item xs={4} className={classes.productTypeGridItem}>
                             {product.type === 'winter' && <><Winter height={20} fill='#000'/><Typography className={classes.typeText}>{product.type}</Typography></>}
                             {product.type === 'summer' && <><Summer height={20} fill='#000'/><Typography className={classes.typeText}>{product.type}</Typography></>}
                             {product.type === 'all_season' && <><AllSeason height={20} fill='#000'/><Typography className={classes.typeText}>all season</Typography></>}
@@ -139,17 +149,17 @@ export default function ProductItem({ product }) {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={1}>
-                        <Grid item xs={2} >
+                        <Grid item xs={3} >
                             <Paper className={classNames(classes.tireClassIcond, classes.fuelEfficiencyClass)}>
                                 <FuelEfficiencyClass fill='#fff' height={15} style={{paddingRight:4}}/>{product.fuel_efficiency_class}
                             </Paper>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <Paper className={classNames(classes.tireClassIcond, classes.wetGripClass)}>
                                 <WetGripClass fill='#fff' height={15} style={{paddingRight:4}}/>{product.wet_grip_class}
                             </Paper>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <Paper className={classNames(classes.tireClassIcond, classes.noiseEmission)}>
                                 <NoiseEmission fill='#fff' height={15} style={{paddingRight:4}}/>{product.noise_emission}
                             </Paper>
@@ -157,7 +167,7 @@ export default function ProductItem({ product }) {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography className={classes.price}>{product.discount_percent > 0 ? product.price+' Lei':' '}</Typography>
+                    <Typography className={classes.price}>{product.price} Lei</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography className={classes.newPrice}>{math.round(math.subtract(Number(product.price), math.multiply(Number(product.price), math.divide(Number(product.discount_percent), 100))),2)} Lei</Typography>
@@ -172,13 +182,12 @@ export default function ProductItem({ product }) {
                                 <Grid item xs={4}>
                                     <Select
                                         className={classes.quantitySelect}
-                                        variant="outlined"
                                         value={quantity}
                                         onChange={(e)=>{setQuantity(e.target.value)}}
+                                        disableUnderline
                                         classes={{
                                             selectMenu: classes.quantitySelectInputProps
                                         }}
-                                        
                                     >
                                         {quantityItems}
                                     </Select>
@@ -186,7 +195,7 @@ export default function ProductItem({ product }) {
                                 <Grid item xs={2} onClick={addToCart}>
                                     <ShoppingCartIcon className={classes.shoppingCartIcon}/>
                                 </Grid>
-                                <Grid item xs={6} onClick={addToCart}>Add to cart</Grid>
+                                <Grid item xs={6} onClick={addToCart} className={classes.addToCartText}>Add to cart</Grid>
                             </Grid>
                         </Button>
                     </Paper>

@@ -42,7 +42,7 @@ class ProductTableSeeder extends Seeder
                 'price' => $faker->randomFloat(2, 100, 1000),
                 'discount_percent' => $faker->numberBetween(0, 10),
                 'stock' => $faker->numberBetween(4, 40),
-                'image_url' => '', //TODO
+                'image_url' => 'tier'.$faker->numberBetween(1, 4).'.jpg',
                 'type' => $faker->randomElement(['winter', 'summer', 'all_season']),
                 'size' => ($faker->numberBetween(27, 71) * 5) . '/'.($faker->numberBetween(5, 17) * 5).'/R'.$faker->numberBetween(10, 27),
                 'fuel_efficiency_class' => $faker->randomElement(['A', 'B', 'C', 'E', 'F', 'G']),
