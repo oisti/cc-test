@@ -12,8 +12,6 @@ import { create, all } from 'mathjs'
 import { Winter, Summer, AllSeason } from '../../assets/svg/TypeIcons';
 import { FuelEfficiencyClass, WetGripClass, NoiseEmission } from '../../assets/svg/TireClassIcond';
 
-
-
 const math = create(all, {})
 
 const useStyles = makeStyles((theme) => ({
@@ -111,7 +109,7 @@ export default function ProductItem({ product }) {
 
 
     let quantityItems = []
-    for (let step = 0; step <= 10; step++) {
+    for (let step = 1; step <= 10; step++) {
         quantityItems.push(<MenuItem key={step} value={step}>{step}</MenuItem>)
     }
 

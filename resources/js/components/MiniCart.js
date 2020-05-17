@@ -19,9 +19,11 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useSelector, useDispatch} from 'react-redux'
 import { SET_CART } from '../store/cartStore';
+import { create, all } from 'mathjs'
 
 import api from "./Api";
 
+const math = create(all, {})
 
 const useStyles = makeStyles((theme) => ({
     expandMoreIcon:{
@@ -58,6 +60,8 @@ export default function MiniCart({ children }) {
        }
     })
     
+
+    let totalValue = 0;
     return (
         <>
             <Button 
@@ -104,18 +108,22 @@ export default function MiniCart({ children }) {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                    {cartItems.map((row) => (
-                                        <TableRow key={row.id}>
-                                            <TableCell component="th" scope="row">
-                                                <b>{row.brand}</b> {row.model}
-                                            </TableCell>
-                                            <TableCell align="center">{row.quantity}</TableCell>
-                                            <TableCell align="right">{row.price * row.quantity} Lei</TableCell>
-                                        </TableRow>
-                                    ))}
+                                    {cartItems.map((row) => {
+                                        const rowValue = math.multiply(math.round(math.subtract(Number(row.price), math.multiply(Number(row.price), math.divide(Number(row.discount_percent), 100))),2), Number(row.quantity))
+                                        totalValue = math.add(rowValue, totalValue)
+                                        return (
+                                            <TableRow key={row.id}>
+                                                <TableCell component="th" scope="row">
+                                                    <b>{row.brand}</b> {row.model}
+                                                </TableCell>
+                                                <TableCell align="center">{row.quantity}</TableCell>
+                                                <TableCell align="right">
+                                                    {rowValue} Lei</TableCell>
+                                            </TableRow>
+                                        )})}
                                         <TableRow>
                                             <TableCell component="th" scope="row">Total</TableCell>
-                                            <TableCell align="right" colSpan={2}>TODO Lei</TableCell>
+                                            <TableCell align="right" colSpan={2}>{totalValue} Lei</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>

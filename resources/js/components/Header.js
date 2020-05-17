@@ -125,7 +125,7 @@ export default function Header({ children }) {
     
     return (
         <>
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position='sticky' className={classes.appBar}>
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.leftContainer}>
                         <IconButton

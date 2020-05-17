@@ -19,7 +19,8 @@ return({
     mainItem:{
         maxWidth: 1440,
         [theme.breakpoints.down('md')]: {
-            margin: theme.spacing(2)
+            marginRight: theme.spacing(2),
+            marginLeft: theme.spacing(2),
         },
     },
     mainGridContainer:{
