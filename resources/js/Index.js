@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-do
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline} from '@material-ui/core';
 import { Provider, connect } from 'react-redux';
-
-import { useDispatch } from 'react-redux'
 import { AUTH_CHECK } from './store/authStore';
 
 import store from './store/store';
@@ -40,7 +38,7 @@ function Index() {
                 <Router>
                     <Switch>
                         <Route path="/login" exact component={Auth}/>
-                        <PrivateRoute component={Products}/>
+                        <PrivateRoute path="/:category?" component={Products}/>
                     </Switch>
                 </Router>
             </ThemeProvider>

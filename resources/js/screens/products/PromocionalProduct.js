@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { api } from "../../components";
 import { create, all } from 'mathjs'
 
+import { Winter } from '../../assets/svg/TypeIcons';
+
+
 const math = create(all, {})
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +33,13 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 800,
         lineHeight: 1
     },
-    name:{
+    typeGridItem:{
+        textAlign: 'center'
+    },
+    type:{
+        color: '#fff'
+    },
+    model:{
         fontSize: 20,
         color: '#fff',
         fontWeight: 400,
@@ -68,14 +77,15 @@ export default function PromocionalProduct({ children }) {
             <Grid item>
                 <Typography component="h4" className={classes.h4}>Tires for cars, trucks, vans and agricultural vehicles</Typography>
             </Grid>
-            <Grid item>
+            {product.id && <Grid item>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start" className={classes.productContainer}>
                     <Grid item xs={9}>
                         <Typography component="h2" className={classes.brand}>{product.brand}</Typography>
-                        <Typography component="h3" className={classes.name}>{product.name}</Typography>
+                        <Typography component="h3" className={classes.model}>{product.model}</Typography>
                     </Grid>
-                    <Grid item xs={3}>
-                        <Typography component="h3" className={classes.name}>TODO</Typography>
+                    <Grid item xs={3} className={classes.typeGridItem}>
+                        <Winter height={40} fill='#fff'/>
+                        <Typography component="h3" className={classes.type}>WINTER</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography className={classes.normalPrice}><del>{product.price} Lei</del></Typography>
@@ -87,7 +97,7 @@ export default function PromocionalProduct({ children }) {
                        <Button variant="contained" color="primary">Find out more</Button>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid>}
         </Grid>
     )
 };

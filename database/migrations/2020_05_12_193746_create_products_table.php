@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('brand', 256)->index();
-            $table->string('name', 256);
+            $table->string('model', 256);
             $table->boolean('promotion');
             $table->decimal('price', 8, 2);
             $table->decimal('discount_percent', 8, 2)->nullable();

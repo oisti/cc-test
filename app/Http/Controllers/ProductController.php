@@ -15,7 +15,7 @@ class ProductController extends Controller{
         }
         if ($request->has('searchTerm')){
             $products->where('brand', 'like', '%'.$request->searchTerm.'%')
-                ->orWhere('name', 'like', '%'.$request->searchTerm.'%')
+                ->orWhere('model', 'like', '%'.$request->searchTerm.'%')
                 ->orWhere('size', 'like', '%'.$request->searchTerm.'%');
         }
         if ($request->has('maxResults')){

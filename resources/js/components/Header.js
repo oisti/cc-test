@@ -27,6 +27,7 @@ import { useSelector } from 'react-redux'
 
 import CCLogo from '../assets/svg/CCLogo';
 import BootstrapTextField from "./BootstrapTextField";
+import MiniCart from "./MiniCart";
 import api from "./Api";
 
 
@@ -169,7 +170,7 @@ export default function Header({ children }) {
                                 {products && products.map(product =>{
                                     return (
                                         <Grid key={product.id} item xs={12}>
-                                            <Typography>{product.name}</Typography>
+                                            <Typography>{product.brand} {product.model} {product.size}</Typography>
                                         </Grid>
                                     )
                                 })}
@@ -186,77 +187,8 @@ export default function Header({ children }) {
                         </Button>
                     </Hidden>
 
-                    <Button 
-                        onClick={(e)=>setCartAnchorEl(e.currentTarget)}
-                        className={classes.menuBtn}
-                        startIcon={<ShoppingCartIcon className={classes.shoppingCartIcon}/>}
-                        endIcon={Boolean(cartAnchorEl)?<ExpandLessIcon className={classes.expandMoreIcon} />:<ExpandMoreIcon className={classes.expandMoreIcon} />}
-                        aria-controls="cart-menu"
-                        aria-haspopup="true"
-                        
-                        >
-                        Cart
-                    </Button>
-                    <Menu
-                        id="cart-menu"
-                        anchorEl={cartAnchorEl}
-                        keepMounted
-                        open={Boolean(cartAnchorEl)}
-                        onClose={()=>setCartAnchorEl(null)}
-                        getContentAnchorEl={null}
-                        elevation={1}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        PaperProps={{
-                            className: classes.cartPaper
-                        }}
-                    >
-                        
-                        {cartItems &&
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <TableContainer>
-                                        <Table className={classes.table} size="small">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Product</TableCell>
-                                                    <TableCell align="center">Quantity</TableCell>
-                                                    <TableCell align="right">Price</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                            {cartItems.map((row) => (
-                                                <TableRow key={row.id}>
-                                                    <TableCell component="th" scope="row">
-                                                        <b>{row.product.brand}</b> {row.product.name}
-                                                    </TableCell>
-                                                    <TableCell align="center">{row.quantity}</TableCell>
-                                                    <TableCell align="right">{row.product.price * row.quantity} Lei</TableCell>
-                                                </TableRow>
-                                            ))}
-                                                <TableRow>
-                                                    <TableCell component="th" scope="row">Total</TableCell>
-                                                    <TableCell align="right" colSpan={2}>TODO Lei</TableCell>
-                                                </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                </Grid>
-                                <Grid item xs={12} className={classes.checkOutGridItem}>
-                                    <Button variant="contained" color="primary" onClick={()=>{history.push('/checkout'); setCartAnchorEl(null);}}>check out</Button>
-                                </Grid>
-                            </Grid>
-                        }
-                        {!cartItems &&
-                            <Typography>Empty</Typography>
-                        }
-                    </Menu>
+                    <MiniCart />
+                    
                 </Toolbar>
             </AppBar>
         </>

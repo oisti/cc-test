@@ -25,6 +25,7 @@ class CategoryTableSeeder extends Seeder
 
         foreach ($categories as $category){
             Category::create([
+                'url_friendly' => strtolower(preg_replace('!\s+!', '-', preg_replace("/[^A-Za-z0-9 ]/", ' ', $category))),
                 'name' => $category
             ]);
         }

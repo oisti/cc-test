@@ -1,8 +1,6 @@
 
 import axios from 'axios';
 
-const token = localStorage.getItem('api_token');
-
 const api = axios.create({
     baseURL: "/api/",
     timeout: 10000,
@@ -15,6 +13,7 @@ api.interceptors.response.use(
     },
     error => {
         if (error.response.status === 401) {
+            localStorage.removeItem('api_token');
             return Promise.reject(error.response);
         }
         return Promise.reject(error.response);
