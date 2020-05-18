@@ -123,7 +123,7 @@ export default function MiniCart({ children }) {
                                         )})}
                                         <TableRow>
                                             <TableCell component="th" scope="row">Total</TableCell>
-                                            <TableCell align="right" colSpan={2}>{totalValue} Lei</TableCell>
+                                            <TableCell align="right" colSpan={2}>{math.round(totalValue, 2)} Lei</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
