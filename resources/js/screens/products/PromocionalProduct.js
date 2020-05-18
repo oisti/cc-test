@@ -11,9 +11,9 @@ const math = create(all, {})
 
 const useStyles = makeStyles((theme) => ({
     mainContainer:{
-        paddingTop: 200,
+        paddingTop: 145,
         [theme.breakpoints.down('md')]: {
-            paddingTop: 100,
+            paddingTop: 40,
         },
     },
     h1:{
@@ -88,7 +88,7 @@ export default function PromocionalProduct({ children }) {
                 setProduct(result.data)
             })
         }
-    })
+    },[])
 
     return (
         <Grid container direction="column" justify="flex-start" alignItems="flex-start" className={classes.mainContainer}>

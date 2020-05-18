@@ -120,17 +120,19 @@ export default function Products({ children }) {
         if (!categories){
             api.get('categories').then(response =>{
                 setCategories(response.data);
-                setActiveCategory(response.data[0])
+                if (!match.params.category){
+                    setActiveCategory(response.data[0])
+                }
             })
         }
-    })
+    },[])
 
     useEffect(() => {
-        if (categories){
+        if (categories && match.params.category){
             const newCategory = categories.filter(cat => cat.url_friendly === match.params.category)[0]
             setActiveCategory(newCategory);
         }
-    },[match.params.category])
+    },[categories, match.params.category])
 
     useEffect(() => {
         if (activeCategory.id){

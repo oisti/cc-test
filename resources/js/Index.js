@@ -11,6 +11,8 @@ import theme from './theme';
 
 import Auth from './screens/auth/auth';
 import Products from './screens/products/products';
+import Checkout from './screens/checkout/checkout';
+
 
 const mapStateToProps = state => ({
     isAuthenticated: state.Auth.isAuthenticated
@@ -38,6 +40,7 @@ function Index() {
                 <Router>
                     <Switch>
                         <Route path="/login" exact component={Auth}/>
+                        <PrivateRoute path="/checkout" exact component={Checkout}/>
                         <PrivateRoute path="/:category?" component={Products}/>
                     </Switch>
                 </Router>
